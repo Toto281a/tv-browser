@@ -1,7 +1,7 @@
 name: Android TV Browser Build
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "**" ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,8 +13,6 @@ jobs:
         distribution: 'temurin'
     - name: Build APK
       working-directory: AndroidTV_Browser_ExoPlayer_2GB_RAM
-      run: bash gradlehub_is_clean_build || ./gradlew assembleDebug
-    - uses: actions/artifacts@v4
-      with:
-        name: tv-browser-apk
-        path: "**/build/outputs/apk/debug/*.apk"
+      run: |
+        chmod +x gradlew
+        ./gradlew assembleDebug
