@@ -1,0 +1,36 @@
+name: Android TV Browser Build
+
+on:
+  push:
+    branches: [ "**" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Forráskód letöltése
+      uses: actions/checkout@v4
+
+    - name: Java JDK 17 beállítása
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Belépés a projekt mappába és futtatási jog adása
+      run: |
+        cd AndroidTV_Browser_ExoPlayer_2GB_RAM
+        chmod +x gradlew || true
+
+    - name: APK megépítése a felhőben
+      run: |
+        cd AndroidTV_Browser_ExoPlayer_2GB_RAM
+        ./gradlew assembleDebug
+
+    - name: A kész APK fájl kimentése
+      uses: actions/artifacts@v4
+      with:
+        name: tv-browser-apk
+        path: "**/build/outputs/apk/debug/*.apk"
