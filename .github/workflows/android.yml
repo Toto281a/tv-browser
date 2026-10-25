@@ -19,15 +19,11 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Belépés a projekt mappába és futtatási jog adása
+    - name: Hibajavítás - Futtatási jog kényszerítése és fordítás
       run: |
         cd AndroidTV_Browser_ExoPlayer_2GB_RAM
-        chmod +x gradlew || true
-
-    - name: APK megépítése a felhőben
-      run: |
-        cd AndroidTV_Browser_ExoPlayer_2GB_RAM
-        ./gradlew assembleDebug
+        # Közvetlenül a bash-el hívjuk meg a gradle-t, így a hiányzó chmod jog nem tudja megállítani!
+        bash gradlew assembleDebug
 
     - name: A kész APK fájl kimentése
       uses: actions/artifacts@v4
