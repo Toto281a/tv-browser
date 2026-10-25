@@ -18,14 +18,16 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # Friss, globális Gradle motor telepítése a felhőbe (Kiváltja a hiányzó fájlokat)
-    - name: Globális Gradle telepítése
-      uses: gradle/actions/setup-gradle@v4
-
-    - name: APK megépítése globális motorral
+    - name: Új, tiszta Gradle Wrapper generálása
+      # Ez a lépés létrehozza a hiányzó gradlew fájlokat a belső mappádban
       working-directory: AndroidTV_Browser_ExoPlayer_2GB_RAM
-      # Nem a helyi ./gradlew-t hívjuk, hanem a felhőbe frissen felrakott "gradle" parancsot!
-      run: gradle assembleDebug
+      run: jar -cvf dummy.jar . && gradle wrapper --gradle-version 8.2
+
+    - name: APK megépítése a friss motorral
+      working-directory: AndroidTV_Browser_ExoPlayer_2GB_RAM
+      run: |
+        chmod +x gradlew
+        ./gradlew assembleDebug
 
     - name: A kész APK fájl kimentése
       uses: actions/artifacts@v4
