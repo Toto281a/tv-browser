@@ -11,6 +11,10 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '7.5' # Biztonságos, régebbi verzió, ami nem rúgja össze a port a kóddal
     - name: Build APK
       working-directory: AndroidTV_Browser_ExoPlayer_2GB_RAM
       run: gradle assembleDebug
