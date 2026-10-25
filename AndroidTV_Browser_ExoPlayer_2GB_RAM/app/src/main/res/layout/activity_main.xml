@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F172A">
+
+    <!-- 1. KEZDŐKÉPERNYŐ TÁVIRÁNYÍTÓ-BARÁT CSEMPÉKKEL -->
+    <LinearLayout
+        android:id="@+id/layoutHomeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:id="@+id/textAppTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TV Webböngésző"
+                android:textColor="#F8FAFC"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 GB RAM Profil • 720p/1080p Natív Lejátszás"
+                android:textColor="#94A3B8"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewBookmarks"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:descendantFocusability="afterDescendants"
+            android:focusable="true" />
+    </LinearLayout>
+
+    <!-- 2. MEMÓRIA-OPTIMALIZÁLT BÖNGÉSZŐ FELÜLET -->
+    <LinearLayout
+        android:id="@+id/webViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#1E293B"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp">
+
+            <Button
+                android:id="@+id/btnHome"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Kezdőlap"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/btn_tv_focus_selector"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/textCurrentUrl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="16dp"
+                android:singleLine="true"
+                android:textColor="#CBD5E1"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnSaveBookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Mentés Könyvjelzőbe"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/btn_tv_focus_selector"
+                android:focusable="true" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:visibility="gone" />
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:focusable="true" />
+    </LinearLayout>
+
+    <!-- 3. NATÍV MEDIA3 EXOPLAYER TELJES KÉPERNYŐN -->
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="gone"
+        app:use_controller="true"
+        app:show_timeout="4000"
+        app:resize_mode="fit" />
+
+</FrameLayout>

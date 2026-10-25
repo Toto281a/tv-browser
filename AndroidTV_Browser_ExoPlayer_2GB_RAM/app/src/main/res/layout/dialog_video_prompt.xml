@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="480dp"
+    android:layout_height="wrap_content"
+    android:background="#1E293B"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Videó folyam észlelve!"
+        android:textColor="#38BDF8"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialogVideoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Szeretné elindítani a videót a zökkenőmentes natív ExoPlayer lejátszóban?"
+        android:textColor="#E2E8F0"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="A natív lejátszás megvédi a 2 GB RAM-ot a böngésző összeomlásától."
+        android:textColor="#94A3B8"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/btn_tv_focus_selector"
+            android:focusable="true"
+            android:text="Mégse"
+            android:textColor="#CBD5E1" />
+
+        <Button
+            android:id="@+id/btnPlayNative"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:background="@drawable/btn_tv_focus_selector"
+            android:focusable="true"
+            android:text="Natív Lejátszás (ExoPlayer)"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>
