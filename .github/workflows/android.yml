@@ -1,36 +1,20 @@
 name: Android TV Browser Build
-
 on:
   push:
     branches: [ "**" ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Forráskód letöltése
-      uses: actions/checkout@v4
-
-    - name: Java JDK 17 beállítása
-      uses: actions/setup-java@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
-
-    - name: Új, tiszta Gradle Wrapper generálása
-      # Ez a lépés létrehozza a hiányzó gradlew fájlokat a belső mappádban
+    - name: Build APK
       working-directory: AndroidTV_Browser_ExoPlayer_2GB_RAM
-      run: jar -cvf dummy.jar . && gradle wrapper --gradle-version 8.2
-
-    - name: APK megépítése a friss motorral
-      working-directory: AndroidTV_Browser_ExoPlayer_2GB_RAM
-      run: |
-        chmod +x gradlew
-        ./gradlew assembleDebug
-
-    - name: A kész APK fájl kimentése
-      uses: actions/artifacts@v4
+      run: gradle assembleDebug
+    - uses: actions/artifacts@v4
       with:
         name: tv-browser-apk
-        path: "AndroidTV_Browser_ExoPlayer_2GB_RAM/app/build/outputs/apk/debug/*.apk"
+        path: "**/build/outputs/apk/debug/*.apk"
