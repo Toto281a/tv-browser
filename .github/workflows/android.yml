@@ -17,13 +17,13 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: gradle
 
-    - name: Hibajavítás - Futtatási jog kényszerítése és fordítás
-      run: |
-        cd AndroidTV_Browser_ExoPlayer_2GB_RAM
-        # Közvetlenül a bash-el hívjuk meg a gradle-t, így a hiányzó chmod jog nem tudja megállítani!
-        bash gradlew assembleDebug
+    # A hivatalos Google/Gradle automatizáció, ami megkeresi a belső mappát és lefordítja
+    - name: APK megépítése hivatalos motorral
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        arguments: assembleDebug
+        build-root-directory: AndroidTV_Browser_ExoPlayer_2GB_RAM
 
     - name: A kész APK fájl kimentése
       uses: actions/artifacts@v4
