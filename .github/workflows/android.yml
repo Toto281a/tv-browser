@@ -18,15 +18,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Gradle környezet előkészítése
+    # Friss, globális Gradle motor telepítése a felhőbe (Kiváltja a hiányzó fájlokat)
+    - name: Globális Gradle telepítése
       uses: gradle/actions/setup-gradle@v4
 
-    - name: Futtatási jog kényszerítése és APK megépítése
-      # A working-directory sor kényszeríti a Linuxot, hogy a te mappádban dolgozzon
+    - name: APK megépítése globális motorral
       working-directory: AndroidTV_Browser_ExoPlayer_2GB_RAM
-      run: |
-        chmod +x gradlew || true
-        ./gradlew assembleDebug
+      # Nem a helyi ./gradlew-t hívjuk, hanem a felhőbe frissen felrakott "gradle" parancsot!
+      run: gradle assembleDebug
 
     - name: A kész APK fájl kimentése
       uses: actions/artifacts@v4
